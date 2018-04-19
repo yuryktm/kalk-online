@@ -1,16 +1,23 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { RouterModule } from '@angular/router';
+import { ROUTES } from './app.routes'
 
 import { AppComponent } from './app.component';
 
+import { NDSCalculatorComponent } from './nds-calculator/nds-calculator.component';
+import { CreditCalculatorComponent } from './credit-calculator/credit-calculator.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NDSCalculatorComponent,
+    CreditCalculatorComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    RouterModule.forRoot(ROUTES)
   ],
   providers: [],
   bootstrap: [AppComponent]

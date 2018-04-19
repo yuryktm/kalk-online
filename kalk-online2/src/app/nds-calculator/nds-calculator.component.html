@@ -1,0 +1,87 @@
+<div class="container">
+
+  <div>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8"><p class="font-weight-bold">НДС Калькулятор Онлайн</p></div>
+      <div class="col-2"></div>
+    </div>
+
+    <!--Сумма-->
+    <div class="row">
+      <div class="col-3"><p class="float-right">Сумма:</p></div>
+      <div class="col-6">
+
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" placeholder="Введите сумму без НД" [value]="summ" (input)="onSumm($event.target.value)">
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="button">Копировать</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+    <!--НДС-->
+    <div class="row">
+      <div class="col-3"><p class="float-right">НДС:</p></div>
+      <div class="col-6">
+
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" placeholder="Введите НДС" [value]="nds" (input)="onNds($event.target.value)">
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="button">Копировать</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+    <!--Сумма с НДС-->
+    <div class="row">
+      <div class="col-3"><p class="float-right">Сумма с НДС:</p></div>
+      <div class="col-6">
+
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" placeholder="Введите сумму с НДС" [value]="summWithNds" (input)="onSummWithNds($event.target.value)">
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" type="button">Копировать</button>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+    <!--НДС в процентах-->
+    <div class="row">
+      <div class="col-3"><label class="float-right">НДС в процентах:</label></div>
+      <div class="col-6">
+
+        <div class="input-group mb-3">
+          <input type="number" class="form-control" aria-describedby="basic-addon2"  [value]="ndsInPercent" (input)="onNdsInPercent($event.target.value)">
+          <div class="input-group-append">
+            <span class="input-group-text" id="basic-addon2">%</span>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-3"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-5">
+        <button type="button" class="btn btn-outline-danger float-right">Очистить поля</button>
+      </div>
+      <div class="col-5">
+        <button type="button" class="btn btn-outline-info">Подсказка</button>
+      </div>
+      <div class="col-1"></div>
+    </div>
+
+  </div>
+
+</div>
