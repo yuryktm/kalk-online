@@ -2,9 +2,9 @@
 
   <div>
     <div class="row">
-      <div class="col-2"></div>
-      <div class="col-8"><p class="font-weight-bold">НДС Калькулятор Онлайн</p></div>
-      <div class="col-2"></div>
+      <div class="col-4"></div>
+      <div class="col-4"><p class="font-weight-bold">НДС Калькулятор Онлайн</p></div>
+      <div class="col-4"></div>
     </div>
 
     <!--Сумма-->
@@ -13,9 +13,9 @@
       <div class="col-6">
 
         <div class="input-group mb-3">
-          <input type="number" class="form-control" placeholder="Введите сумму без НД" [value]="summ" (input)="onSumm($event.target.value)">
+          <input id="summId" type="number" class="form-control" placeholder="Введите сумму без НД" [value]="summ" (input)="onSumm($event.target.value)">
           <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="button">Копировать</button>
+            <button class="btn btn-outline-primary" type="button" (click)="copyElementText('summId')">Копировать</button>
           </div>
         </div>
 
@@ -29,9 +29,9 @@
       <div class="col-6">
 
         <div class="input-group mb-3">
-          <input type="number" class="form-control" placeholder="Введите НДС" [value]="nds" (input)="onNds($event.target.value)">
+          <input id="ndsId" type="number" class="form-control" placeholder="Введите НДС" [value]="nds" (input)="onNds($event.target.value)">
           <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="button">Копировать</button>
+            <button class="btn btn-outline-primary" type="button" (click)="copyElementText('ndsId')">Копировать</button>
           </div>
         </div>
 
@@ -45,9 +45,9 @@
       <div class="col-6">
 
         <div class="input-group mb-3">
-          <input type="number" class="form-control" placeholder="Введите сумму с НДС" [value]="summWithNds" (input)="onSummWithNds($event.target.value)">
+          <input id="summWithNdsId" type="number" class="form-control" placeholder="Введите сумму с НДС" [value]="summWithNds" (input)="onSummWithNds($event.target.value)">
           <div class="input-group-append">
-            <button class="btn btn-outline-primary" type="button">Копировать</button>
+            <button class="btn btn-outline-primary" type="button" (click)="copyElementText('summWithNdsId')">Копировать</button>
           </div>
         </div>
 
@@ -74,14 +74,86 @@
     <div class="row">
       <div class="col-1"></div>
       <div class="col-5">
-        <button type="button" class="btn btn-outline-danger float-right">Очистить поля</button>
+        <button type="button" class="btn btn-outline-danger float-right" (click)="onClearFields()">Очистить поля</button>
       </div>
       <div class="col-5">
-        <button type="button" class="btn btn-outline-info">Подсказка</button>
+        <button type="button" class="btn btn-outline-info" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">Подсказка</button>
       </div>
       <div class="col-1"></div>
     </div>
 
   </div>
+
+  <div class="nds-calc">
+    <div id="collapseExample" [ngbCollapse]="isCollapsed">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Подсказка</h5>
+
+          <p><b>НДС калькулятор.</b> Калькулятор расчета налога на добавленную стоимость (НДС).</p>
+          <p>Калькулятор очень прост и понятен в использовании, есть несколько вариантов работы:</p>
+          <p></p>
+          <p>1. В поле <span class="badge badge-info">Сумма</span> вводится сумму, в полях <span class="badge badge-info">НДС</span> и <span class="badge badge-info">Сумма с НДС</span> калькулятор рассчитывает НДС(выделенная НДС) и Сумму с НДС(начисленная НДС) соответственно.</p>
+          <p></p>
+          <p>2. В поле <span class="badge badge-info">НДС</span> вводится налог, который взимается из искомой суммы, калькулятор подсчитает облагаемую налогом сумму и Сумму с НДС(начисленная НДС) результат операции отображается в полях <span class="badge badge-info">Сумма</span> и <span class="badge badge-info">Сумма с НДС</span> соответственно.</p>
+          <p></p>
+          <p>3. В поле <span class="badge badge-info">Сумма с НДС</span> вводится, Сумму с НДС(сумма с начисленной НДС), калькулятор подсчитает Сумму и НДС в полях <span class="badge badge-info">Сумма</span> и <span class="badge badge-info">НДС</span> соответственно.</p>
+          <p></p>
+          <p>По умолчанию расчет производится для налоговой ставки НДС 18 процентов, налоговую ставку можно задать в поле НДС в процентах.</p>
+          <p></p>
+          <p>Для очистки полей нажмите кнопку <span class="badge badge-info">Очистить поля</span></p>
+          <p></p>
+          <p>Кнопка скопировать число в буфер обмена - <span class="badge badge-primary">Копировать</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nds-calc">
+    <div class="card">
+    <div class="card-body">
+      <p><b>Что такое НДС?</b></p>
+      <p></p>
+      <p><b>Налог на добавленную стоимость (НДС), англ. VAT(value added tax)</b> — налог на товары и услуги основой которого служит величина, добавленная на каждом этапе производства и реализации продукта(товара).</p>
+      <p></p>
+      <p><b>Какая сейчас налоговая ставка НДС?</b></p>
+      <p></p>
+      <p><b>Налоговая ставка НДС в России</b> по умолчанию 18 %, для некоторых операций налоговая ставка составляет 10 % и 0 %.</p>
+      <p></p>
+      <p><b>Как начислить НДС?</b></p>
+      <p></p>
+      <p><b>Начислить НДС на сумму</b> означает прибавить к сумме ставку налога.</p>
+      <p>Для этого сначала определим сумму налога. Возьмем к примеру сумму в 100 рублей.</p>
+      <p></p>
+      <p>умму налога = Сумма * Процентная ставка / 100 = 100 * 18 / 100 = 18 рублей</p>
+      <p></p>
+      <p>Сумма налога получилась 18 рублей, дальше сложим ее с суммой.</p>
+      <p></p>
+      <p>Сумма с начисленной НДС = Сумму налога + Сумма = 18 + 100 = 118 рубле.</p>
+      <p></p>
+      <p>В результате, начисления НДС на сумму составило 118 рублей.</p>
+      <p></p>
+      <p><b>Как выделить НДС?</b></p>
+      <p></p>
+      <p><b>Выделить НДС</b> означает, получить сумму налога от облагаемой налогом суммы.</p>
+      <p>К примеру есть сумма 100 рубле.</p>
+      <p></p>
+      <p>Сумму налога = Сумма * Процентная ставка / 100 = 100 * 18 / 100 = 18 рублей.</p>
+      <p></p>
+      <p>Выделенный НДС равен 18 рублей.</p>
+      <p></p>
+      <p><b>Какая формула расчета НДС?</b></p>
+      <p></p>
+      <p><b>Формула расчета НДС</b></p>
+      <p></p>
+      <p>НДС = Сумма * Процентная ставка / 100 , пусть Сумма = 100 рублей, процентная ставка 18 %, тогда</p>
+      <p></p>
+      <p>НДС = 100 * 18 / 100 = 18 рублей</p>
+
+    </div>
+  </div>
+  </div>
+
 
 </div>

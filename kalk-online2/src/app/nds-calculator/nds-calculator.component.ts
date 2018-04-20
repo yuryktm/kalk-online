@@ -1,19 +1,26 @@
 //nds-calculator
-import { Component } from '@angular/core';
+import {Component, Inject} from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
-  templateUrl: './nds-calculator.component.html'
+  templateUrl: './nds-calculator.component.html',
+  styleUrls: ['./nds-calculator.component.css']
 })
 
 export class NDSCalculatorComponent {
 
-  summ: number;               //Сумма
-  nds: number;                //НДС
-  summWithNds: number;        //Сумма с НДС
-  ndsInPercent: number;       //НДС в процентах
+  summ: any;               //Сумма
+  nds: any;                //НДС
+  summWithNds: any;        //Сумма с НДС
+  ndsInPercent: any;       //НДС в процентах
+  isCollapsed: any;        //подсказка
 
-  constructor() {
+  private dom: Document;
+
+  constructor(@Inject(DOCUMENT) dom: Document) {
+    this.dom = dom;
     this.ndsInPercent = 18;
+    this.isCollapsed = true;
   }
 
   public onSumm(summ) {
@@ -38,5 +45,24 @@ export class NDSCalculatorComponent {
     this.ndsInPercent = parseFloat(ndsInPercent);
     this.nds = (this.summ * this.ndsInPercent) / 100;
     this.summWithNds = this.summ + this.ndsInPercent;
+  }
+
+  public onClearFields() {
+    this.nds = '';
+    this.summ = '';
+    this.summWithNds = '';
+    this.ndsInPercent = 18;
+  }
+
+  public copyElementText(id) {
+    var element = null;
+    try {
+      element = this.dom.getElementById(id);
+      element.select();
+      this.dom.execCommand("copy");
+    }
+    finally {
+      this.dom.getSelection().removeAllRanges;
+    }
   }
 }
